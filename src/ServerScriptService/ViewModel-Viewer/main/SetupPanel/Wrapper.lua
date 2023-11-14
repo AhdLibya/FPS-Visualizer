@@ -10,7 +10,7 @@ local Theme         = settings().Studio.Theme
 
 ----------------
 local Types     = require(Viewer.Types)
-local Trove	    = require(Dependencies.Trove)
+local Trove     = require(Dependencies.Trove)
 local Signal    = require(Dependencies.Signal)
 local GetItem   = require(script.Parent.GetItem)
 local Loger     = require(Utiles.Loger)
