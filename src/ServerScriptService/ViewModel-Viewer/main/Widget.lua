@@ -59,7 +59,6 @@ function Widget.setActive(self: Widget , Active: boolean)
 	end
 	self.Widget:Destroy()
 	self.Widget = self.NilWidget[1]
-	print(self.Widget)
 end
 
 function Widget.destroy(self: Widget)
