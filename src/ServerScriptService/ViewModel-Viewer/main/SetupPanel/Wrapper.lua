@@ -6,6 +6,7 @@ local UserInputService	= game:GetService("UserInputService")
 --------------------
 local Viewer		= script.Parent.Parent.Parent
 local Dependencies 	= Viewer.Dependencies
+local Utiles		= Viewer.Util
 local Theme 		= settings().Studio.Theme
 
 ----------------
@@ -13,7 +14,7 @@ local Types 	= require(Viewer.Types)
 local Trove		= require(Dependencies.Trove)
 local Signal 	= require(Dependencies.Signal)
 local GetItem 	= require(script.Parent.GetItem)
-local Types 	= require(script.Parent.Parent.Parent.Types)
+local Loger		= require(Utiles.Loger)
 
 ----------------------------
 local PLUGIN_NAME 			= "View Port Viewer"
@@ -152,7 +153,7 @@ return function (setupPanel: Types._setupPanel)
 		local objectValue = item:WaitForChild("ref") :: ObjectValue
 		local instance = objectValue.Value ::Model
 		if not instance then
-			warn(`Internal Error Selection Value is nil`)
+			Loger(`Internal Error Selection Value is nil`)
 			return
 		end
 		if this.selected then
@@ -162,7 +163,7 @@ return function (setupPanel: Types._setupPanel)
 		item.BackgroundColor3 = Theme:GetColor(Enum.StudioStyleGuideColor.Item, Enum.StudioStyleGuideModifier.Selected)
 		item.NameTextLabel.TextColor3 = Theme:GetColor(Enum.StudioStyleGuideColor.MainText, Enum.StudioStyleGuideModifier.Selected)
 		if instance.PrimaryPart == nil then
-			warn("selected instance dose not have PrimaryPart")
+			Loger("selected instance dose not have PrimaryPart")
 		end
 		setupPanel:setToViewport(instance)
 		return self

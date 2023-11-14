@@ -14,6 +14,7 @@ local Widget 				= require(script.Parent.Widget)
 local createViewportFrame 	= require(script.createViewportFrame)
 local RenderManger 			= require(script.Parent.RenderManger)
 local GetCameraPart 		= require(Utils.GetCameraPart)
+local Loger					= require(Utils.Loger)
 
 local PLUGIN_NAME = "View Port Viewer"
 
@@ -46,7 +47,7 @@ local function attachViewport(self: Types._setupPanel , model: Model)
 	local Camera = ViewportFrame:FindFirstChildOfClass("Camera")
 	
 	if not CameraPart then
-		warn(`The Selected Model <{model.Name}> Can't Be Rendered`)
+		Loger(`The Selected Model <{model.Name}> Can't Be Rendered`)
 		self:free()
 		return
 	end
@@ -93,7 +94,7 @@ function SetupPanel.open(self: _setupPanel)
 	
 	self._guiHanlder.InstanceAttached:Connect(function(...: any) 
 		if not self._selected then
-			warn("Can not Attach <nil> to viewport")
+			Loger("Can not Attach <nil> to viewport")
 			return
 		end
 		if self._activeViewportInstance then

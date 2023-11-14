@@ -18,8 +18,6 @@ local Trove = require(Dependencies.Trove)
 
 local trove = Trove.new()
 
-local CAMERA_PART = "CameraPart"
-
 local writable = {
 	Anchored = true,
 	Archivable = true,
@@ -36,11 +34,6 @@ local writable = {
 
 local RenderManger = {}
 local rendering = false
-
-local function isWritable(property: string)
-	return writable[property]
-end
-
 
 
 function RenderManger.addModel(model: Model , camera: Camera , viewport: ViewportFrame , target: PVInstance)
@@ -70,9 +63,9 @@ function RenderManger.addModel(model: Model , camera: Camera , viewport: Viewpor
 		end
 	end
 	
-	trove:BindToRenderStep("RENDER_CAMERA_TO_VIEWMODEL" , Enum.RenderPriority.Camera.Value + 1, function(dt: number)
-		camera.CFrame = target:GetPivot()
+	trove:BindToRenderStep("RENDER_CAMERA_TO_VIEWMODEL" , Enum.RenderPriority.Camera.Value + 1, function(_: number)
 		task.spawn(update)
+		camera.CFrame = target:GetPivot()
 	end)
 end
 
