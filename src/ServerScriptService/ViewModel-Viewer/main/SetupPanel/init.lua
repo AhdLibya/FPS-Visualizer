@@ -1,22 +1,23 @@
 local CoreGui = game:GetService("CoreGui")
 
-local Viewer		= script.Parent.Parent
-local Dependencies 	= Viewer.Dependencies
-local Utils			= script.Parent.Parent.Util
+local Viewer        = script.Parent.Parent
+local Dependencies  = Viewer.Dependencies
+local Utils	        = script.Parent.Parent.Util
 
-local Trove					= require(Dependencies.Trove)
-local Signal 				= require(Dependencies.Signal)
-local ignoreTypes			= require(Utils.IgnoreTypes)
-local Types 				= require(Viewer.Types)
-local MainFrame 			= require(script.Main)
-local createUiWrapper 		= require(script.Wrapper)
-local Widget 				= require(script.Parent.Widget)
-local createViewportFrame 	= require(script.createViewportFrame)
-local RenderManger 			= require(script.Parent.RenderManger)
-local GetCameraPart 		= require(Utils.GetCameraPart)
-local Loger					= require(Utils.Loger)
+local Trove                 = require(Dependencies.Trove)
+local Signal                = require(Dependencies.Signal)
+local ignoreTypes           = require(Utils.IgnoreTypes)
+local Types                 = require(Viewer.Types)
+local MainFrame             = require(script.Main)
+local createUiWrapper       = require(script.Wrapper)
+local Widget                = require(script.Parent.Widget)
+local createViewportFrame   = require(script.createViewportFrame)
+local RenderManger          = require(script.Parent.RenderManger)
+local GetCameraPart         = require(Utils.GetCameraPart)
+local Loger                 = require(Utils.Loger)
+local GetConstants          = require(Utils.GetConstants)()
 
-local PLUGIN_NAME = "View Port Viewer"
+local PLUGIN_NAME = GetConstants.PLUGIN_NAME
 
 type _setupPanel = Types._setupPanel
 type SetupPanelInstance = Types.SetupPanelInstance

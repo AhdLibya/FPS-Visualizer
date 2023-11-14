@@ -1,17 +1,17 @@
 local Types = require(script.Parent.Parent.Parent.Types)
 
 local function createViewportFrame(setupPanel: Types._setupPanel , model: Model)
-	local ViewportFrame 			= Instance.new("ViewportFrame")
-	ViewportFrame.Name 				= "ViewportFrame"
-	ViewportFrame.Ambient 			= Color3.fromRGB(220, 220, 220)
-	ViewportFrame.LightColor 		= Color3.fromRGB(229, 229, 229)
-	ViewportFrame.LightDirection	= Vector3.new(-2, -2, -2)
-	ViewportFrame.AnchorPoint 		= Vector2.new(0.5, 0.5)
-	ViewportFrame.BackgroundColor3 	= Color3.fromRGB(212, 248, 255)
-	ViewportFrame.BorderColor3 		= Color3.fromRGB(0, 0, 0)
-	ViewportFrame.BorderSizePixel 	= 0
-	ViewportFrame.Position 			= UDim2.fromScale(0.5, 0.5)
-	ViewportFrame.Size 				= UDim2.fromScale(1, 1)
+	local ViewportFrame             = Instance.new("ViewportFrame")
+	ViewportFrame.Name              = "ViewportFrame"
+	ViewportFrame.Ambient           = Color3.fromRGB(220, 220, 220)
+	ViewportFrame.LightColor        = Color3.fromRGB(229, 229, 229)
+	ViewportFrame.LightDirection    = Vector3.new(-2, -2, -2)
+	ViewportFrame.AnchorPoint       = Vector2.new(0.5, 0.5)
+	ViewportFrame.BackgroundColor3  = Color3.fromRGB(212, 248, 255)
+	ViewportFrame.BorderColor3      = Color3.fromRGB(0, 0, 0)
+	ViewportFrame.BorderSizePixel   = 0
+	ViewportFrame.Position          = UDim2.fromScale(0.5, 0.5)
+	ViewportFrame.Size              = UDim2.fromScale(1, 1)
 
 	local Baseplate = Instance.new("Part")
 	Baseplate.Name = "Baseplate"
@@ -40,8 +40,8 @@ local function createViewportFrame(setupPanel: Types._setupPanel , model: Model)
 	Camera.Name = "Camera"
 	Camera.CFrame = CFrame.new(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 	
-	Camera.CameraType 	= Enum.CameraType.Scriptable
-	Camera.Parent 		= ViewportFrame
+	Camera.CameraType = Enum.CameraType.Scriptable
+	Camera.Parent     = ViewportFrame
 	ViewportFrame.CurrentCamera = Camera
 	
 	return ViewportFrame
