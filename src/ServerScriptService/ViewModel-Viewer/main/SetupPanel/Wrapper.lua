@@ -1,26 +1,24 @@
 ------------------------
-local StudioService 	= game:GetService("StudioService")
 local TweenService		= game:GetService("TweenService")
 local UserInputService	= game:GetService("UserInputService")
 
 --------------------
-local Viewer		= script.Parent.Parent.Parent
-local Dependencies 	= Viewer.Dependencies
-local Utiles		= Viewer.Util
-local Theme 		= settings().Studio.Theme
+local Viewer        = script.Parent.Parent.Parent
+local Dependencies  = Viewer.Dependencies
+local Utiles        = Viewer.Util
+local Theme         = settings().Studio.Theme
 
 ----------------
-local Types 	= require(Viewer.Types)
-local Trove		= require(Dependencies.Trove)
-local Signal 	= require(Dependencies.Signal)
-local GetItem 	= require(script.Parent.GetItem)
-local Loger		= require(Utiles.Loger)
+local Types     = require(Viewer.Types)
+local Trove	    = require(Dependencies.Trove)
+local Signal    = require(Dependencies.Signal)
+local GetItem   = require(script.Parent.GetItem)
+local Loger     = require(Utiles.Loger)
 
 ----------------------------
-local PLUGIN_NAME 			= "View Port Viewer"
-local SELECTED				= "Selected"
-local NORMAL_COLOR 			= Color3.fromRGB(37,37,37)
-local CLOSE_HOVER_COLOR 	= Color3.fromRGB(170, 0, 0)
+local SELECTED	            = "Selected"
+local NORMAL_COLOR          = Color3.fromRGB(37,37,37)
+local CLOSE_HOVER_COLOR     = Color3.fromRGB(170, 0, 0)
 
 local function isAnimatable(instance: Instance)
 	return 
@@ -31,13 +29,18 @@ end
 
 
 return function (setupPanel: Types._setupPanel)
-	local this = {}
-	this._trove = Trove.new()
-	this.InstanceAttached 	= this._trove:Construct(Signal) :: Signal.Signal<...any>
-	this.RemoveSignal 		= this._trove:Construct(Signal) :: Signal.Signal<...any>
-	this.TerminateSignal 	= this._trove:Construct(Signal) :: Signal.Signal<...any>
-	this.selected = nil
+	--class
+	local this         = {}
+	-- store
 	local itemsIndexer = {}
+	
+	this._trove             = Trove.new()
+	this.InstanceAttached   = this._trove:Construct(Signal) :: Signal.Signal<...any>
+	this.RemoveSignal       = this._trove:Construct(Signal) :: Signal.Signal<...any>
+	this.TerminateSignal    = this._trove:Construct(Signal) :: Signal.Signal<...any>
+	this.selected           = nil
+
+
 	function this:init()
 		local object = setupPanel._instance
 
@@ -117,7 +120,6 @@ return function (setupPanel: Types._setupPanel)
 		local StartPos : Vector3
 		local FramePos : UDim2
 
-		local inputBegin
 		local inputEnded
 		local inputChanged
 
@@ -144,7 +146,7 @@ return function (setupPanel: Types._setupPanel)
 			inputEnded = this._trove:Add(object.Header.DragPoint.InputEnded:Connect(InputEnd))
 			inputChanged = this._trove:Add(UserInputService.InputChanged:Connect(InputChanged))
 		end
-		inputBegin = this._trove:Add(object.Header.DragPoint.InputBegan:Connect(InputBegan))
+		this._trove:Add(object.Header.DragPoint.InputBegan:Connect(InputBegan))
 		return self
 	end
 
