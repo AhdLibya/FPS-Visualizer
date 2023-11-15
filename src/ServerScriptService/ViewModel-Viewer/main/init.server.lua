@@ -1,16 +1,15 @@
 --!strict
-local Selection 	= game:GetService("Selection")
-local RunService 	= game:GetService("RunService")
 
+local App = require(script.SetupPanel)
+local Constants = require(script.Parent.Util.GetConstants)()
 
-local Constants 			= script.Parent:GetAttributes() :: {[string]: string}
-local PLUGIN_ID 			= Constants.PLUGIN_ID
-local PLUGIN_NAME 			= Constants.PLUGIN_NAME
+local PLUGIN_ID    = Constants.PLUGIN_ID
+local PLUGIN_NAME  = Constants.PLUGIN_NAME
 
-local Plugin 		= plugin :: Plugin
-local toolbar 		= Plugin:CreateToolbar(PLUGIN_NAME)
-local button 		= toolbar:CreateButton(PLUGIN_ID , "Open Setup Panel" , "rbxassetid://15337354002") :: PluginToolbarButton
-local setupPanel 	= require(script.SetupPanel).create(Plugin , toolbar)
+local Plugin      = plugin :: Plugin
+local toolbar     = Plugin:CreateToolbar(PLUGIN_NAME)
+local button      = toolbar:CreateButton(PLUGIN_ID , "Open Setup Panel" , "rbxassetid://15337354002") :: PluginToolbarButton
+local setupPanel  = App.create(Plugin , toolbar)
 
 local PluginOpen = false
 

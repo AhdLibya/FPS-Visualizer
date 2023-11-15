@@ -1,26 +1,23 @@
-local CoreGui 			= game:GetService("CoreGui")
-local StudioService		= game:GetService("StudioService")
-local UserInputService	= game:GetService("UserInputService")
-local Selection			= game:GetService("Selection")
-local TweenService		= game:GetService("TweenService")
+local CoreGui = game:GetService("CoreGui")
 
-local Viewer		= script.Parent.Parent
-local Dependencies 	= Viewer.Dependencies
+local Viewer        = script.Parent.Parent
+local Dependencies  = Viewer.Dependencies
+local Utils	        = script.Parent.Parent.Util
 
+local Trove                 = require(Dependencies.Trove)
+local Signal                = require(Dependencies.Signal)
+local ignoreTypes           = require(Utils.IgnoreTypes)
+local Types                 = require(Viewer.Types)
+local MainFrame             = require(script.Main)
+local createUiWrapper       = require(script.Wrapper)
+local Widget                = require(script.Parent.Widget)
+local createViewportFrame   = require(script.createViewportFrame)
+local RenderManger          = require(script.Parent.RenderManger)
+local GetCameraPart         = require(Utils.GetCameraPart)
+local Loger                 = require(Utils.Loger)
+local GetConstants          = require(Utils.GetConstants)()
 
-local Trove					= require(Dependencies.Trove)
-local Signal 				= require(Dependencies.Signal)
-local ignoreTypes			= require(Dependencies.IgnoreTypes)
-local Types 				= require(Viewer.Types)
-local MainFrame 			= require(script.Main)
-local createUiWrapper 		= require(script.Wrapper)
-local Widget 				= require(script.Parent.Widget)
-local createViewportFrame 	= require(script.createViewportFrame)
-local RenderManger 			= require(script.Parent.RenderManger)
-local GetCameraPart 		= require(script.GetCameraPart)
-
-local PLUGIN_NAME = "View Port Viewer"
-local NIL_TABLE = {} :: {ViewportFrame}
+local PLUGIN_NAME = GetConstants.PLUGIN_NAME
 
 type _setupPanel = Types._setupPanel
 type SetupPanelInstance = Types.SetupPanelInstance
@@ -51,7 +48,7 @@ local function attachViewport(self: Types._setupPanel , model: Model)
 	local Camera = ViewportFrame:FindFirstChildOfClass("Camera")
 	
 	if not CameraPart then
-		warn(`The Selected Model <{model.Name}> Can't Be Rendered`)
+		Loger(`The Selected Model <{model.Name}> Can't Be Rendered`)
 		self:free()
 		return
 	end
@@ -98,7 +95,7 @@ function SetupPanel.open(self: _setupPanel)
 	
 	self._guiHanlder.InstanceAttached:Connect(function(...: any) 
 		if not self._selected then
-			warn("Can not Attach <nil> to viewport")
+			Loger("Can not Attach <nil> to viewport")
 			return
 		end
 		if self._activeViewportInstance then
